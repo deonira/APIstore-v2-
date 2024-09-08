@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['address', 'phone_number']
+        fields = ['phone_number', 'address']
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +22,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+class UserProfileSerializer(serializers.Serializer):
+    user = UserSerializer()
+    profile = ProfileSerializer()
+
+

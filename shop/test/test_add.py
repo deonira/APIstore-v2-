@@ -1,6 +1,6 @@
 import requests
 
-ADD_PRODUCT_URL = "http://localhost:8000/api/products/"
+ADD_PRODUCT_URL = "http://localhost:8000/store/products/"
 
 access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1ODIxNTExLCJpYXQiOjE3MjU4MjEyMTEsImp0aSI6IjVhODkwNjM0MjQ3OTQ4NGFhNWQyN2JhNGRiMjBkZjNjIiwidXNlcl9pZCI6MX0.D4F0iiu6RN2glVtNCWwZf8JuedYBO3dCjjt__oTorWo"
 
