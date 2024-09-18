@@ -1,6 +1,9 @@
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework import generics
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
@@ -59,3 +62,34 @@ class UserProfileDetailView(generics.RetrieveAPIView):
                 'user': user,
                 'profile': None
             }
+
+class ProductCreateView(APIView):
+    @swagger_auto_schema(
+        operation_description="Создать новый продукт",
+        responses={
+            status.HTTP_201_CREATED: openapi.Response('Продукт создан', ProductSerializer),
+            status.HTTP_400_BAD_REQUEST: "Ошибка валидации"
+        },
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'name': openapi.Schema(type=openapi.TYPE_STRING, description='Название продукта'),
+                'description': openapi.Schema(type=openapi.TYPE_STRING, description='Описание продукта'),
+                'price': openapi.Schema(type=openapi.TYPE_NUMBER, description='Цена продукта'),
+                'category': openapi.Schema(type=openapi.TYPE_INTEGER, description='ID категории продукта'),
+            },
+            required=['name', 'price', 'category','description'],
+            example={
+                "name": "Smartphone",
+                "description": "Новейший смартфон с множеством функций",
+                "price": 499.99,
+                "category": 1
+            }
+        )
+    )
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
