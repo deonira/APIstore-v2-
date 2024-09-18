@@ -1,5 +1,11 @@
 FROM python:3.11
-WORKDIR /
-COPY . /app
-RUN pip install-r requirements.txt
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+WORKDIR /app
+
+COPY requirments.txt /app/
+
+RUN pip install -r requirments.txt
+
+COPY . /app/
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
