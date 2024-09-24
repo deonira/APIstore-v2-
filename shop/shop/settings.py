@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'store',
     'drf_yasg',
+    'madina.it-academy-kb.webtm.ru',
 ]
 
 MIDDLEWARE = [
